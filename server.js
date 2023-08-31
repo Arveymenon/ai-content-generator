@@ -80,7 +80,7 @@ app.post("/generateData", async (request, response)=>{
       count > -1 && type == 'blog' && await getBlogData(request, response, content);
       count > -1 && type == 'logo' && await getLogoData(request, response, content);
     } else {
-      response.status(201).send({"message": {"message": "max usage excceeded"}})
+      response.status(201).send({"message": "max usage excceeded"})
     }
   } else {
     console.log("fire email verification link")
