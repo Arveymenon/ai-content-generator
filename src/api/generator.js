@@ -28,8 +28,12 @@ const generateData = async (generatorData, userData) => {
             const blog = response.response
             const user = response.user
             localStorage.setItem('User',JSON.stringify(user))
-            const renderedHTML = md.render(blog);
-            return renderedHTML;
+            if(generatorData.type === 'blog') {
+                const renderedHTML = md.render(blog);
+                return renderedHTML;
+            } else {
+                return response.response
+            }
         }
     }).catch(err => {
       console.log("Error", err)
