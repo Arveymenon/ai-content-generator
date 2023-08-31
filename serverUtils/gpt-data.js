@@ -4,6 +4,32 @@ const bearerToken = process.env.OPEN_AI_KEY;
 
 const basePath = `https://api.openai.com/`
 
+const getBlogContent = (body) => {
+  return `
+    Generate an SEO-optimized blog for my company, ${body.content.company_name}, in the ${body.content.industry_name} industry.
+      Parameters:
+      - Blog Type: ${body.content.blog_type}
+      - Blog Topic: ${body.content.topic}
+      - Word Limit: 50
+      - Format: Markdown
+      
+      Output Format:
+      1. Blog Content
+      2. Suggested Excerpt for the Blog
+      3. Suggested Meta Tags for the Blog
+      4. Suggested Meta Description for the Blog
+      5. Focus Keyword Used in the Blog
+      6. Suggested Categories for the Blog
+  `
+}
+
+const getLogoContent = (body) => {
+  return `
+    Generate a minimalistic logo for a company named ${body.content.company_name}, in the ${body.content.industry_name} industry.
+    ${body.content.idea && "Use use the idea of "+body.content.idea}
+  `
+}
+
 const getBlogData = async (req, response, content) => {
     console.log(response)
     return await fetch(basePath+"v1/chat/completions", {
@@ -45,15 +71,19 @@ const getLogoData = async (req, response, content) => {
         },
         body: JSON.stringify({
           "prompt": content,
-          "n": 2,
+          "n": 1,
           "size": "1024x1024"
         })
       }).then(async chatCompletionResponse => {
         let res = await chatCompletionResponse.json();
-        response.send({"response": res});
+        response.send({"response": res, "user": {
+          name: req.body.name,
+          email: req.body.email,
+          mobile: req.body.mobile
+        }})
       }).catch((err)=>{
         response.send("error", err)
       })
 }
 
-module.exports = { getBlogData, getLogoData }
+module.exports = { getBlogData, getLogoData, getBlogContent, getLogoContent }

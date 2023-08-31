@@ -2,7 +2,7 @@
 const express = require('express')
 const path = require("path");
 const { fetchLeads, reduceCount, putLead } = require('./serverUtils/wix-data');
-const { getBlogData, getLogoData } = require('./serverUtils/gpt-data');
+const { getBlogData, getLogoData, getBlogContent, getLogoContent } = require('./serverUtils/gpt-data');
 const { sendEmail } = require('./serverUtils/emailer');
 const app = express()
 const bodyParser = require('body-parser');
@@ -46,40 +46,29 @@ app.post("/generateData", async (request, response)=>{
   console.log(request.body)
   const body = request.body
 
-  const content = `
-  Generate an SEO-optimized blog for my company, ${body.content.company_name}, in the ${body.content.industry_name} industry.
-    Parameters:
-    - Blog Type: ${body.content.blog_type}
-    - Blog Topic: ${body.content.topic}
-    - Word Limit: 50
-    - Format: Markdown
-    
-    Output Format:
-    1. Blog Content
-    2. Suggested Excerpt for the Blog
-    3. Suggested Meta Tags for the Blog
-    4. Suggested Meta Description for the Blog
-    5. Focus Keyword Used in the Blog
-    6. Suggested Categories for the Blog
-  `
-
+  
   const name = body.name;
   const email = body.email;
   const mobile = body.mobile;
   const type = body.content.type;
-
-  // Arul to be updated
-  // const content = "Just say " + body.content.industry_name;
-
-  // Arul: Remove hardcoded mobile and type
+  
   let getLeadsResponse = await fetchLeads(mobile, email, type);
   if (typeof getLeadsResponse === 'number') {
     if (getLeadsResponse > 0) {
       const count = await reduceCount(mobile, type)
       console.log(count)
-      count > -1 && type == 'blog' && await getBlogData(request, response, content);
-      count > -1 && type == 'logo' && await getLogoData(request, response, content);
-    } else {
+      if(count > -1) {
+        if(type == 'blog') {
+          const content = getBlogContent(body)
+          await getBlogData(request, response, content)
+        }
+        if(type == 'logo') {
+          const content = getLogoContent(body)
+          await getLogoData(request, response, content);
+        }
+      }
+    } 
+    else {
       response.status(201).send({"message": "max usage excceeded"})
     }
   } else {

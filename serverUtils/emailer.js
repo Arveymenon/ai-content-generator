@@ -15,9 +15,14 @@ const sendEmail = async (email, mobile, name) => {
     // 2.2 User doesn't exists
     // 1. Send OTP to end user
     const dataToEncrypt = { email: email, mobile: mobile, name:  name}
-    // const basePath = "https://long-jade-sheep.cyclic.cloud/verify/user/verify"
-    // const basePath = "http://localhost:3000/user/verify"
-    const basePath = "https://www.haloeffect.in/registration-successful"
+
+    let basePath = ""
+    if(process.env.BASE_PATH === "http://localhost:3000"){
+        basePath = "http://localhost:3000/user/verify"
+    } else {
+        basePath = `${process.env.BASE_PATH}/registration-successful`
+    }
+    
     const token = jwt.sign(dataToEncrypt, "secretKey", { algorithm: 'HS256' });
     const mailSendingStartTime = new Date()
     const info = await transporter.sendMail({

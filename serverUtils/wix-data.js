@@ -4,9 +4,8 @@ const { myWixClient } = require('./wix-client');
 const reduceCount = async (mobile, type) => {
   const leads = await myWixClient.items
   .queryDataItems({ dataCollectionId: 'Leads' })
-  .find(
-    { fields: { "mobile": mobile }}
-  );
+  .eq("mobile", mobile)
+  .find();
 
   const dataItemId = leads._items[0].data._id;
 
