@@ -10,16 +10,21 @@
   color: white;
 }
 
-.blogContent{
+.blogContent {
   text-align: left;
   padding: 0 25%;
 }
 
-.my-form-input{
+.my-form-input {
   margin-bottom: 20px !important;
 }
 
-.dd{
+.dd {
   width: 200px;
   text-align: left;
+}
+
+.logo {
+  width: 50%;
+  margin-left: 25%;
 }

@@ -58,6 +58,7 @@ function Generator() {
       return;
     }
     if(response){
+      setShowUserFields(false)
       setGeneratedData(response);
       setNotification("");
     }
@@ -219,7 +220,7 @@ function Generator() {
           <div dangerouslySetInnerHTML={{ __html: generatedData }} />
         ) : (
           generatedData?.data?.length && (
-            <img
+            <img className="logo"
               src={generatedData.data[0].url}
               alt={generatedData.data[0].url}
             />
