@@ -23,10 +23,10 @@ const getBlogContent = (body) => {
   `
 }
 
+// Generate a minimalistic symbol for a company named ${body.content.company_name}, in the ${body.content.industry_name} industry. ${body.content.idea && "Use the idea of "+body.content.idea}. The symbol should be text-free. Ensure the design has no letters, words, or text elements.
 const getLogoContent = (body) => {
   return `
-    Generate a minimalistic logo for a company named ${body.content.company_name}, in the ${body.content.industry_name} industry.
-    ${body.content.idea && "Use use the idea of "+body.content.idea}
+  An professional abstract symbol of ${body.content.company_name} in the ${body.content.industry_name} industry.
   `
 }
 
