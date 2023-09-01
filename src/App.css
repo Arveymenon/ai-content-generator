@@ -14,3 +14,12 @@
   text-align: left;
   padding: 0 25%;
 }
+
+.my-form-input{
+  margin-bottom: 20px !important;
+}
+
+.dd{
+  width: 200px;
+  text-align: left;
+}
