@@ -1,7 +1,8 @@
 import './App.css';
 import React from 'react';
 import { generateData } from './api/generator';
-import Loader, {  } from './utils/loader';
+import Loader from './utils/loader';
+import TextField from '@mui/material/TextField';
 
 const defaultGeneratorData = {
   type: "blog",
@@ -86,24 +87,24 @@ function Generator () {
               {
                 userDataRequired && 
                 <div>
-                    <input type="test" id="name" placeholder="name" onChange={(event) => getUserData(event, "name")}/>
-                    <input type="text" id="email" placeholder="email" onChange={(event) => getUserData(event, "email")}/>
-                    <input type="text" id="mobile" placeholder="mobile" onChange={(event) => getUserData(event, "mobile")}/>
+                    <TextField label="Outlined" variant="outlined" type="test" id="name" placeholder="name" onChange={(event) => getUserData(event, "name")}/>
+                    <TextField label="Outlined" variant="outlined" type="text" id="email" placeholder="email" onChange={(event) => getUserData(event, "email")}/>
+                    <TextField label="Outlined" variant="outlined" type="text" id="mobile" placeholder="mobile" onChange={(event) => getUserData(event, "mobile")}/>
                 </div>
               }
               
               {generatorData.type === 'blog' ?
               <>
-                <input type="text" id="company_name" placeholder="company_name" onChange={(event) => updateForm(event, "company_name")}/>
-                <input type="text" id="industry_name" placeholder="industry_name" onChange={(event) => updateForm(event, "industry_name")}/>
-                <input type="text" id="blog_type" placeholder="blog_type" onChange={(event) => updateForm(event, "blog_type")}/>
-                <input type="text" id="topic" placeholder="topic" onChange={(event) => updateForm(event, "topic")}/>
+                <TextField label="Outlined" variant="outlined" type="text" id="company_name" placeholder="company_name" onChange={(event) => updateForm(event, "company_name")}/>
+                <TextField label="Outlined" variant="outlined" type="text" id="industry_name" placeholder="industry_name" onChange={(event) => updateForm(event, "industry_name")}/>
+                <TextField label="Outlined" variant="outlined" type="text" id="blog_type" placeholder="blog_type" onChange={(event) => updateForm(event, "blog_type")}/>
+                <TextField label="Outlined" variant="outlined" type="text" id="topic" placeholder="topic" onChange={(event) => updateForm(event, "topic")}/>
               </> 
               :
               <>
-                <input type="text" id="company_name" placeholder="company_name" onChange={(event) => updateForm(event, "company_name")}/>
-                <input type="text" id="industry_name" placeholder="industry_name" onChange={(event) => updateForm(event, "industry_name")}/>
-                <input type="text" id="idea" placeholder="idea (optional)" onChange={(event) => updateForm(event, "idea")}/>
+                <TextField label="Outlined" variant="outlined" type="text" id="company_name" placeholder="company_name" onChange={(event) => updateForm(event, "company_name")}/>
+                <TextField label="Outlined" variant="outlined" type="text" id="industry_name" placeholder="industry_name" onChange={(event) => updateForm(event, "industry_name")}/>
+                <TextField label="Outlined" variant="outlined" type="text" id="idea" placeholder="idea (optional)" onChange={(event) => updateForm(event, "idea")}/>
               </>
               }
 
